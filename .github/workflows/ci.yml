@@ -1,4 +1,4 @@
-name: Java CI
+name: Expense Tracker CI
 
 on:
   push:
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  test-and-build-image:
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Check out repository
@@ -26,3 +26,6 @@ jobs:
 
       - name: Run tests
         run: bash ./mvnw test
+
+      - name: Build Docker image
+        run: docker build -t expense-tracker:ci .
